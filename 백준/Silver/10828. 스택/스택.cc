@@ -1,64 +1,45 @@
 #include <iostream>
+#include <algorithm>
 #include <stack>
 #include <string>
 using namespace std;
-struct Stack {
-    int data[10000];
-    int size;
-    Stack() {
-        size = 0;
-    }
-    void push(int num) {
-        data[size] = num;
-        size += 1;
-    }
-    bool empty() {
-        if (size == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    int pop() {
-        if (empty()) {
-            return -1;
-        } else {
-            size -= 1;
-            return data[size];
-        }
-    }
-    int top() {
-        if (empty()) {
-            return -1;
-        } else {
-            return data[size-1];
-        }
-    }
-};
-int main() {
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(0);
     int n;
     cin >> n;
-
-    Stack s;
-
-    while (n--) {
-        string cmd;
-        cin >> cmd;
-        if (cmd == "push") {
-            int num;
-            cin >> num;
-            s.push(num);
-        } else if (cmd == "top") {
-            cout << (s.top()) << '\n';
-        } else if (cmd == "size") {
-            cout << s.size << '\n';
-        } else if (cmd == "empty") {
-            cout << s.empty() << '\n';
-        } else if (cmd == "pop") {
-            cout << (s.top()) << '\n';
-            if (!s.empty()) {
-                s.pop();
+    stack<int> stack;
+    while(n--){
+        string s;
+        cin >> s;
+        if(s == "push"){
+            int a;
+            cin >> a;
+            stack.push(a);
+        }
+        else if(s == "pop"){
+            if(stack.empty()){
+                cout << -1 << '\n';
             }
+            else{
+                cout << stack.top() << '\n';
+                stack.pop();
+            }
+        }
+        else if (s == "top"){
+            if(stack.empty()){
+                cout << -1 << '\n';
+            }
+            else{
+                cout << stack.top() << '\n';
+            }
+        }
+        else if(s == "empty"){
+            cout << stack.empty() << '\n';
+        }
+        else if(s == "size"){
+            cout << stack.size() << '\n';
         }
     }
     return 0;
